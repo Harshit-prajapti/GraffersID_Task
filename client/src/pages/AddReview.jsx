@@ -64,7 +64,8 @@ const AddReview = () => {
             navigate('/'); // Navigate to home or company detail
         } catch (error) {
             console.error('Error creating review:', error);
-            alert('Error adding review. Please try again.');
+            const message = error.response?.data?.message || 'Error adding review. Please try again.';
+            alert(message);
         } finally {
             setLoading(false);
         }

@@ -10,7 +10,8 @@ const CompanyList = () => {
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedCity, setSelectedCity] = useState('Indore, Madhya Pradesh, India');
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+    const [selectedCity, setSelectedCity] = useState('');
     const [cities, setCities] = useState([]);
     const [sortBy, setSortBy] = useState('Name');
 
@@ -19,8 +20,18 @@ const CompanyList = () => {
     }, []);
 
     useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedSearchTerm(searchTerm);
+        }, 500);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [searchTerm]);
+
+    useEffect(() => {
         loadCompanies();
-    }, [searchTerm, selectedCity, sortBy]);
+    }, [debouncedSearchTerm, selectedCity, sortBy]);
 
     const loadCities = async () => {
         try {
@@ -35,12 +46,12 @@ const CompanyList = () => {
         setLoading(true);
         try {
             const params = {};
-            if (searchTerm) params.search = searchTerm;
+            if (debouncedSearchTerm) params.search = debouncedSearchTerm;
             if (selectedCity && selectedCity !== 'Indore, Madhya Pradesh, India') params.city = selectedCity;
             params.sortBy = sortBy;
 
+            console.log("Fetching with params:", params);
             const data = await fetchCompanies(params);
-            console.log(data);
             setCompanies(data);
         } catch (error) {
             console.error('Error loading companies:', error);
@@ -53,38 +64,33 @@ const CompanyList = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Search Controls */}
             <div className="flex flex-col md:flex-row md:items-center md:space-x-4 mb-8 space-y-4 md:space-y-0">
-                {/* City Selector */}
+
+                {/* Search Input */}
                 <div className="flex-1">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Select City
+                        Search Company
                     </label>
                     <div className="relative">
                         <input
                             type="text"
-                            value={selectedCity}
-                            onChange={(e) => setSelectedCity(e.target.value)}
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                            placeholder="Enter city..."
+                            placeholder="Search by name, city..."
                         />
-                        <MapPin className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
-                        {/* 
-                           Note: If we want a dropdown like before, we could use a datalist or custom dropdown. 
-                           The user's design mockup showed a text input. keeping as input for now but maybe suggested list 
-                        */}
+                        <Search className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
                     </div>
                 </div>
 
-                {/* Find Button */}
                 <div className="pt-0 md:pt-7">
                     <button
-                        onClick={loadCompanies}
+                        onClick={() => loadCompanies()}
                         className="btn-primary cursor-pointer"
                     >
-                        Find Company
+                        Search Company
                     </button>
                 </div>
 
-                {/* Add Company Button */}
                 <div className="pt-0 md:pt-7">
                     <button
                         onClick={() => navigate('/add-company')}

@@ -32,7 +32,8 @@ const AddCompany = () => {
             navigate('/');
         } catch (error) {
             console.error('Error creating company:', error);
-            alert('Error adding company. Please try again.');
+            const message = error.response?.data?.message || 'Error adding company. Please try again.';
+            alert(message);
         } finally {
             setLoading(false);
         }
