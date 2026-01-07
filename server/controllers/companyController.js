@@ -78,6 +78,7 @@ export const getCompanyById = async (req, res) => {
 export const createCompany = async (req, res) => {
     try {
         console.log("Creating new company : ", req.body);
+        
         const { name, location, foundedOn, city, logo, description } = req.body;
 
         if (!name || !location || !foundedOn || !city) {

@@ -14,10 +14,8 @@ const CompanyCard = ({ company }) => {
         <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow">
             <div className="flex justify-between items-start">
                 <div className="flex space-x-4">
-                    {/* Logo */}
                     <img className='w-24 h-24 rounded-lg object-cover overflow-hidden' src={company.logo} alt="" />
 
-                    {/* Company Info */}
                     <div className="flex-1">
                         <h3 className="text-lg font-semibold text-gray-900 mb-1">
                             {company.name}
@@ -33,7 +31,6 @@ const CompanyCard = ({ company }) => {
                     </div>
                 </div>
 
-                {/* Right Side Info */}
                 <div className="text-right">
                     <p className="text-xs text-gray-500 mb-3">{dateLabel}</p>
                     <button

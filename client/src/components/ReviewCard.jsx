@@ -1,10 +1,7 @@
 import React from 'react';
 import StarRating from './StarRating';
-import { likeReview } from '../api/api';
 
-const ReviewCard = ({ review, onLike }) => {
-    const [likes, setLikes] = React.useState(review.likes);
-    const [isLiking, setIsLiking] = React.useState(false);
+const ReviewCard = ({ review }) => {
     const textIcon = review.fullName.charAt(0).toUpperCase();
     const textBackground = review.fullName.charAt(0).toUpperCase();
 

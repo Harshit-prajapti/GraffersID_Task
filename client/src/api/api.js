@@ -9,7 +9,6 @@ const api = axios.create({
     },
 });
 
-// Company API calls
 export const fetchCompanies = async (params = {}) => {
     const { data } = await api.get('/companies', { params });
     return data;
