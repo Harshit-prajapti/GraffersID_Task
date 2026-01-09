@@ -3,12 +3,10 @@ import StarRating from './StarRating';
 
 const ReviewCard = ({ review }) => {
     const textIcon = review.fullName.charAt(0).toUpperCase();
-    const textBackground = review.fullName.charAt(0).toUpperCase();
 
     return (
         <div className="card p-2 animate-fade-in">
             <div className="flex gap-2 items-start mb-3">
-                {/* logo name with icon */}
                 <div>
                     <div className="w-12 h-12 rounded-full flex items-center justify-center bg-gray-200 text-gray-600 font-bold">
                         {textIcon}
@@ -23,7 +21,7 @@ const ReviewCard = ({ review }) => {
                 <StarRating rating={review.rating} readonly />
             </div>
 
-            {/* <h5 className="font-medium text-gray-800 mb-2">{review.subject}</h5> */}
+
             <p className="text-gray-700 mb-4">{review.reviewText}</p>
         </div>
     );

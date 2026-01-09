@@ -10,28 +10,28 @@ const TopBar = () => {
                         <div className="w-10 h-10 bg-gradient-to-br from-pink-600 to-blue-700 rounded-full flex items-center justify-center">
                             <span className="text-white text-xl font-bold">★</span>
                         </div>
-                        <span className="text-xl font-semibold">
-                            Review<span className="font-bold">&RATE</span>
+                        <span className="text-xl">
+                            Review<span className="font-semibold"><span className='bg-clip-text text-transparent bg-gradient-to-br from-pink-600 to-blue-700'>&</span>RATE</span>
                         </span>
                     </div>
 
-                    <div className="flex-1 max-w-md mx-4">
+                    <div className="flex-1 max-w-md mx-4 pl-32">
                         <div className="relative">
                             <input
                                 type="text"
                                 placeholder="Search..."
-                                className="w-full px-6 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                className="w-full px-6 py-1 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                             />
                             <Search className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
                         </div>
                     </div>
 
                     {/* Auth Buttons */}
-                    <div className="flex items-center space-x-4">
-                        <button className="text-gray-700 hover:text-gray-900 font-medium">
+                    <div className="flex items-center gap-16 mr-10">
+                        <button className="text-gray-700 hover:text-gray-900 font-medium cursor-pointer">
                             SignUp
                         </button>
-                        <button className="text-gray-700 hover:text-gray-900 font-medium">
+                        <button className="text-gray-700 hover:text-gray-900 font-medium cursor-pointer">
                             Login
                         </button>
                     </div>

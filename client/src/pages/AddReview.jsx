@@ -61,7 +61,7 @@ const AddReview = () => {
                 companyId: id,
             });
             alert('Review added successfully!');
-            navigate('/'); // Navigate to home or company detail
+            navigate('/');
         } catch (error) {
             console.error('Error creating review:', error);
             const message = error.response?.data?.message || 'Error adding review. Please try again.';
@@ -76,28 +76,23 @@ const AddReview = () => {
     }
 
     return (
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            {/* <button
-                onClick={() => navigate('/')}
-                className="flex items-center text-gray-600 hover:text-purple-700 mb-6 transition-colors"
-            >
-                <ArrowLeft className="w-5 h-5 mr-2" />
-                Back to Companies
-            </button> */}
+        <div className="min-h-screen bg-gray-50 py-8 px-4">
+            <div className="max-w-2xl mx-auto">
+                <div className="bg-white shadow-sm rounded-lg">
+                    <div className="border-b border-gray-200 px-6 py-4">
+                        <h1 className="text-xl font-semibold text-gray-900">
+                            Write a Review
+                        </h1>
+                        <p className="text-sm text-gray-500 mt-1">
+                            Share your experience with {company.name}
+                        </p>
+                    </div>
 
-            <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
-                <div className="bg-purple-600 px-8 py-6 text-white">
-                    <h1 className="text-2xl font-bold">Write a Review</h1>
-                    <p className="mt-1 opacity-90">Share your experience with <span className="font-semibold">{company.name}</span></p>
-                </div>
-
-                <div className="p-8">
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid grid-cols-1 gap-6">
-                            {/* Rating Section - Prominent */}
-                            <div className="bg-purple-50 p-6 rounded-lg text-center border border-purple-100">
-                                <label className="block text-lg font-medium text-purple-900 mb-2">
-                                    How would you rate your experience?
+                    <div className="px-6 py-6">
+                        <div className="space-y-5">
+                            <div className="bg-gray-50 border border-gray-200 rounded-lg p-5">
+                                <label className="block text-sm font-medium text-gray-700 mb-3 text-center">
+                                    Rating <span className="text-red-500">*</span>
                                 </label>
                                 <div className="flex justify-center">
                                     <StarRating
@@ -106,14 +101,16 @@ const AddReview = () => {
                                         readOnly={false}
                                     />
                                 </div>
-                                <p className="text-sm text-purple-700 mt-2">
-                                    {formData.rating > 0 ? `You selected ${formData.rating} stars` : 'Select stars above'}
-                                </p>
+                                {formData.rating > 0 && (
+                                    <p className="text-xs text-gray-500 mt-2 text-center">
+                                        {formData.rating} out of 5 stars
+                                    </p>
+                                )}
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Your Name *
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Your Name <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -121,14 +118,14 @@ const AddReview = () => {
                                     required
                                     value={formData.fullName}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                     placeholder="Enter your full name"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Review Subject *
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Review Subject <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -136,14 +133,14 @@ const AddReview = () => {
                                     required
                                     value={formData.subject}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                     placeholder="Brief summary of your review"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Your Review *
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Your Review <span className="text-red-500">*</span>
                                 </label>
                                 <textarea
                                     name="reviewText"
@@ -151,29 +148,30 @@ const AddReview = () => {
                                     value={formData.reviewText}
                                     onChange={handleChange}
                                     rows="6"
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none"
-                                    placeholder="Tell us about your experience in detail..."
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                                    placeholder="Share your detailed experience..."
                                 />
                             </div>
                         </div>
 
-                        <div className="flex gap-4 pt-4">
+                        <div className="flex justify-end gap-3 mt-6 pt-6 border-t border-gray-200">
                             <button
                                 type="button"
                                 onClick={() => navigate('/')}
-                                className="flex-1 px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+                                className="px-5 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                             >
                                 Cancel
                             </button>
                             <button
-                                type="submit"
+                                type="button"
+                                onClick={handleSubmit}
                                 disabled={loading}
-                                className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg font-medium hover:from-purple-700 hover:to-purple-800 transition-all shadow-md hover:shadow-lg disabled:opacity-70"
+                                className="px-5 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {loading ? 'Submitting...' : 'Submit Review'}
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -27,11 +27,13 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
 });
 
+// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ message: 'Something went wrong..', error: err.message });
+    res.status(500).json({ message: 'Something went wrong!', error: err.message });
 });
 
+// 404 handler
 app.use((req, res) => {
     res.status(404).json({ message: 'Route not found' });
 });
@@ -39,14 +41,6 @@ app.use((req, res) => {
 connectDB().then(() => {
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
-        console.log(`API endpoints:`);
-        console.log(`   - GET    /api/companies`);
-        console.log(`   - POST   /api/companies`);
-        console.log(`   - GET    /api/companies/:id`);
-        console.log(`   - GET    /api/reviews/:companyId`);
-        console.log(`   - POST   /api/reviews`);
-        console.log(`   - GET    /api/reviews/:companyId/average`);
-        console.log(`   - PUT    /api/reviews/:id/like`);
     });
 });
 

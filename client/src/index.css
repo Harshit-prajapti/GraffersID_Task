@@ -7,7 +7,7 @@
 }
 
 .btn-primary {
-  @apply bg-gradient-to-br from-pink-400 to-blue-900 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  @apply bg-gradient-to-br from-pink-400 to-blue-900 text-white font-medium py-2 px-4 rounded-sm transition-colors duration-200;
 }
 
 .input-field {
