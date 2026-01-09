@@ -26,7 +26,6 @@ const TopBar = () => {
                         </div>
                     </div>
 
-                    {/* Auth Buttons */}
                     <div className="flex items-center gap-16 mr-10">
                         <button className="text-gray-700 hover:text-gray-900 font-medium cursor-pointer">
                             SignUp
